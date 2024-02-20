@@ -1,6 +1,8 @@
 package com.example.MyRest.controller;
 
 import com.example.MyRest.service.Animal;
+import com.example.util.MyRestUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +27,9 @@ public class MyRestController {
 
     private Animal animal;
 
+    @Autowired
+    private MyRestUtil util;
+
     public MyRestController(Animal animal) {
         this.animal = animal;
     }
@@ -38,11 +43,7 @@ public class MyRestController {
     public String animalFarm(
             @RequestParam(name = "animal1") String animal1,
             @RequestParam(name = "animal2") String animal2) {
-        String a1 = animal1;
-        String a2 = animal1;
-        if(animal1.length() < animal2.length()) a1 = animal2;
-        else a2 = animal2;
-        return "A %s jumps over a %s".formatted(a1,a2);
+        return util.animalFarmHelper(animal1, animal2);
     }
 
     @GetMapping("/suggestAnimal")
