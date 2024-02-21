@@ -1,8 +1,10 @@
 package com.example.MyRest.controller;
 
 import com.example.MyRest.service.Animal;
+import com.example.MyRest.service.Plant;
 import com.example.util.MyRestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,11 +29,25 @@ public class MyRestController {
 
     private Animal animal;
 
+    private Animal animal2;
+
+    private Plant plant;
+
     @Autowired
     private MyRestUtil util;
 
     public MyRestController(Animal animal) {
         this.animal = animal;
+    }
+
+    @Autowired
+    public void setPlant(Plant plant) {
+        this.plant = plant;
+    }
+
+    @Autowired
+    public void setAnimal2(@Qualifier("dogService") Animal animal2) {
+        this.animal2 = animal2;
     }
 
     @GetMapping("/test")
@@ -48,7 +64,7 @@ public class MyRestController {
 
     @GetMapping("/suggestAnimal")
     public String suggestAnimal() {
-        List<String> animalList = List.of("Dog", "Cat", "Bird", "Tiger", "Elephant", "Camel", "Donkey", "Lizard");
+        List<String> animalList = List.of("Dog", "CatService", "Bird", "Tiger", "Elephant", "Camel", "Donkey", "Lizard");
         int i = ((int)Math.floor(Math.random() * 10)) % 8;
         return animalList.get(i);
     }
@@ -64,7 +80,15 @@ public class MyRestController {
 
     @GetMapping("/favAnimal")
     public String getFavAnimal() {
-        return animal.getName();
+        return animal.getBreed();
     }
+
+    @GetMapping("/favAnimal2")
+    public String getFavAnimal2() {
+        return animal2.getBreed();
+    }
+
+    @GetMapping("/favTree")
+    public String getFavTree() { return plant.getSpecies(); }
 
 }
