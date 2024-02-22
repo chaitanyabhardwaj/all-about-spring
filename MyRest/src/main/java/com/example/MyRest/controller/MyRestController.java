@@ -3,6 +3,8 @@ package com.example.MyRest.controller;
 import com.example.MyRest.service.Animal;
 import com.example.MyRest.service.Plant;
 import com.example.util.MyRestUtil;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -101,6 +103,16 @@ public class MyRestController {
     public String increaseScopeFlag() {
         animal2.increaseI();
         return "Animal: " + animal.getI() + ", Animal2: " + animal2.getI();
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Bean " + getClass().getSimpleName() + " has been constructed!");
+    }
+
+    @PreDestroy
+    public void onDestroy() {
+        System.out.println("Bean " + getClass().getSimpleName() + " is being destroyed!");
     }
 
 }

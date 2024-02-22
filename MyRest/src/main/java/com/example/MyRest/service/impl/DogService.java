@@ -1,6 +1,8 @@
 package com.example.MyRest.service.impl;
 
 import com.example.MyRest.service.Animal;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,16 @@ public class DogService implements Animal {
     @Override
     public int getI() {
         return i;
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Bean " + getClass().getSimpleName() + " has been constructed!");
+    }
+
+    @PreDestroy
+    public void onDestroy() {
+        System.out.println("Bean " + getClass().getSimpleName() + " is being destroyed!");
     }
 
 }
