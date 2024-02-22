@@ -9,11 +9,24 @@ import org.springframework.stereotype.Service;
 public class DogService implements Animal {
 
     private final static String NAME = "Dog";
+
+    private int i;
+
     public DogService() {
         System.out.println("In constructor of " + getClass().getSimpleName());
     }
 
     @Override
     public String getBreed() { return NAME; }
+
+    @Override
+    public void increaseI() {
+        i++;
+    }
+
+    @Override
+    public int getI() {
+        return i;
+    }
 
 }

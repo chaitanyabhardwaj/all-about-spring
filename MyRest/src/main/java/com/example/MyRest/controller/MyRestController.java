@@ -92,4 +92,15 @@ public class MyRestController {
     @GetMapping("/favTree")
     public String getFavTree() { return plant.getSpecies(); }
 
+    @GetMapping("/checkAnimalScope")
+    public String checkAnimalScope() {
+        return "Comparing animal and animal2: " + (animal == animal2);
+    }
+
+    @GetMapping("/increaseScopeFlag")
+    public String increaseScopeFlag() {
+        animal2.increaseI();
+        return "Animal: " + animal.getI() + ", Animal2: " + animal2.getI();
+    }
+
 }

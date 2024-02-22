@@ -10,12 +10,25 @@ public class CatService implements Animal {
 
     private final static String NAME = "Cat";
 
+    private int i;
+
     public CatService() {
         System.out.println("In constructor of " + getClass().getSimpleName());
+        i = 0;
     }
     @Override
     public String getBreed() {
         return NAME;
+    }
+
+    @Override
+    public void increaseI() {
+        i++;
+    }
+
+    @Override
+    public int getI() {
+        return i;
     }
 
 }
