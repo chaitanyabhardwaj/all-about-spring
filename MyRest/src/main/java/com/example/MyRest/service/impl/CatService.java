@@ -1,11 +1,14 @@
 package com.example.MyRest.service.impl;
 
 import com.example.MyRest.service.Animal;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
 @Primary
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class CatService implements Animal {
 
     private final static String NAME = "Cat";
