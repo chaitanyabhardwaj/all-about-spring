@@ -10,7 +10,9 @@ public class CatService implements Animal {
 
     private final static String NAME = "Cat";
 
-    public CatService() {}
+    public CatService() {
+        System.out.println("In constructor of " + getClass().getSimpleName());
+    }
     @Override
     public String getBreed() {
         return NAME;

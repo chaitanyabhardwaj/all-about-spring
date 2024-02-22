@@ -37,6 +37,7 @@ public class MyRestController {
     private MyRestUtil util;
 
     public MyRestController(Animal animal) {
+        System.out.println("In constructor of " + getClass().getSimpleName());
         this.animal = animal;
     }
 
@@ -46,7 +47,7 @@ public class MyRestController {
     }
 
     @Autowired
-    public void setAnimal2(@Qualifier("dogService") Animal animal2) {
+    public void setAnimal2(@Qualifier("catService") Animal animal2) {
         this.animal2 = animal2;
     }
 

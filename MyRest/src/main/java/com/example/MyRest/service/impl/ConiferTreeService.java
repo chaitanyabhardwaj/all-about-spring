@@ -8,7 +8,9 @@ public class ConiferTreeService implements Plant {
 
     private final static String NAME = "Conifer Tree";
 
-    public ConiferTreeService() {}
+    public ConiferTreeService() {
+        System.out.println("In constructor of " + getClass().getSimpleName());
+    }
 
     @Override
     public String getSpecies() {
