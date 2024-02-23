@@ -33,6 +33,8 @@ public class MyRestController {
 
     private Animal animal2;
 
+    private Animal animal3;
+
     private Plant plant;
 
     @Autowired
@@ -49,8 +51,13 @@ public class MyRestController {
     }
 
     @Autowired
-    public void setAnimal2(@Qualifier("catService") Animal animal2) {
+    public void setAnimal2(@Qualifier("dogService") Animal animal2) {
         this.animal2 = animal2;
+    }
+
+    @Autowired
+    public void setAnimal3(@Qualifier("birdService") Animal animal3) {
+        this.animal3 = animal3;
     }
 
     @GetMapping("/test")
@@ -67,7 +74,7 @@ public class MyRestController {
 
     @GetMapping("/suggestAnimal")
     public String suggestAnimal() {
-        List<String> animalList = List.of("Dog", "CatService", "Bird", "Tiger", "Elephant", "Camel", "Donkey", "Lizard");
+        List<String> animalList = List.of("Dog", "Cat", "Bird", "Tiger", "Elephant", "Camel", "Donkey", "Lizard");
         int i = ((int)Math.floor(Math.random() * 10)) % 8;
         return animalList.get(i);
     }
@@ -89,6 +96,11 @@ public class MyRestController {
     @GetMapping("/favAnimal2")
     public String getFavAnimal2() {
         return animal2.getBreed();
+    }
+
+    @GetMapping("/favAnimal3")
+    public String getFavAnimal3() {
+        return animal3.getBreed();
     }
 
     @GetMapping("/favTree")
