@@ -117,9 +117,15 @@ public class MyRestController {
     }
 
     @PostMapping("/putAnimalInPark")
-    public String putInZoo(@RequestBody AnimalModel animalModel) {
+    public String putAnimalInPark(@RequestBody AnimalModel animalModel) {
         animal.save(animalModel);
         return "Saved!";
+    }
+
+    @GetMapping("/getAnimalFromPark")
+    public String getAnimalFromPark(@RequestParam(name="id") int id) {
+        AnimalModel animalModel = animal.findById(id);
+        return (animalModel != null) ? animalModel.toString() : "Not found";
     }
 
     @PostConstruct

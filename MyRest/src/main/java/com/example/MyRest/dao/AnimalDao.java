@@ -19,4 +19,8 @@ public class AnimalDao {
         entityManager.persist(animalEntity);
     }
 
+    public AnimalEntity findById(int id) {
+        return entityManager.find(AnimalEntity.class, id);
+    }
+
 }

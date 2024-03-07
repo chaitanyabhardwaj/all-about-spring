@@ -23,4 +23,10 @@ public interface Animal {
         getAnimalDao().save(entity);
     }
 
+    default AnimalModel findById(int id) {
+        AnimalEntity entity = getAnimalDao().findById(id);
+        if(entity == null) return null;
+        return new AnimalModel(entity.getId(), entity.getBreed(), entity.getIntelligence());
+    }
+
 }
