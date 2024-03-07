@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name="animal")
-public class Animal {
+public class AnimalEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,9 @@ public class Animal {
     private BigDecimal intelligence;
 
     //no-args constructor
-    public Animal() {}
+    public AnimalEntity() {}
 
-    public Animal(int id, String breed, BigDecimal intelligence) {
+    public AnimalEntity(int id, String breed, BigDecimal intelligence) {
         this.id = id;
         this.breed = breed;
         this.intelligence = intelligence;
@@ -56,8 +56,8 @@ public class Animal {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Animal animal = (Animal) o;
-        return id == animal.id && Objects.equals(breed, animal.breed) && Objects.equals(intelligence, animal.intelligence);
+        AnimalEntity animalEntity = (AnimalEntity) o;
+        return id == animalEntity.id && Objects.equals(breed, animalEntity.breed) && Objects.equals(intelligence, animalEntity.intelligence);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.MyRest.controller;
 
+import com.example.MyRest.model.AnimalModel;
 import com.example.MyRest.service.Animal;
 import com.example.MyRest.service.Plant;
 import com.example.util.MyRestUtil;
@@ -8,9 +9,7 @@ import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -115,6 +114,12 @@ public class MyRestController {
     public String increaseScopeFlag() {
         animal2.increaseI();
         return "Animal: " + animal.getI() + ", Animal2: " + animal2.getI();
+    }
+
+    @PostMapping("/putAnimalInPark")
+    public String putInZoo(@RequestBody AnimalModel animalModel) {
+        animal.save(animalModel);
+        return "Saved!";
     }
 
     @PostConstruct

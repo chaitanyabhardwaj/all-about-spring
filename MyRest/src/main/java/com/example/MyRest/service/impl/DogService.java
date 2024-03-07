@@ -1,8 +1,10 @@
 package com.example.MyRest.service.impl;
 
+import com.example.MyRest.dao.AnimalDao;
 import com.example.MyRest.service.Animal;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class DogService implements Animal {
     private final static String NAME = "Dog";
 
     private int i;
+
+    @Autowired
+    private AnimalDao dao;
 
     public DogService() {
         System.out.println("In constructor of " + getClass().getSimpleName());
@@ -29,6 +34,11 @@ public class DogService implements Animal {
     @Override
     public int getI() {
         return i;
+    }
+
+    @Override
+    public AnimalDao getAnimalDao() {
+        return dao;
     }
 
     @PostConstruct

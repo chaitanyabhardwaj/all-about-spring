@@ -1,8 +1,12 @@
 package com.example.MyRest.service.impl;
 
+import com.example.MyRest.dao.AnimalDao;
+import com.example.MyRest.entity.AnimalEntity;
+import com.example.MyRest.model.AnimalModel;
 import com.example.MyRest.service.Animal;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +20,9 @@ public class CatService implements Animal {
     private final static String NAME = "Cat";
 
     private int i;
+
+    @Autowired
+    private AnimalDao dao;
 
     public CatService() {
         System.out.println("In constructor of " + getClass().getSimpleName());
@@ -34,6 +41,11 @@ public class CatService implements Animal {
     @Override
     public int getI() {
         return i;
+    }
+
+    @Override
+    public AnimalDao getAnimalDao() {
+        return dao;
     }
 
     @PostConstruct
