@@ -5,6 +5,7 @@ import com.example.MyRest.entity.AnimalEntity;
 import com.example.MyRest.model.AnimalModel;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -18,16 +19,18 @@ public interface Animal {
 
     AnimalDao getAnimalDao();
 
-    default void save(AnimalModel model) {
-        AnimalEntity entity = new AnimalEntity();
-        entity.setBreed(model.getBreed());
-        entity.setIntelligence(model.getIntelligence());
-        getAnimalDao().save(entity);
-    }
-
     default AnimalModel toModel(AnimalEntity entity) {
         if(entity == null) return null;
         return new AnimalModel(entity.getId(), entity.getBreed(), entity.getIntelligence());
+    }
+
+    default AnimalEntity toEntity(AnimalModel model) {
+        if(model == null) return null;
+        return new AnimalEntity(model.getId(), model.getBreed(), model.getIntelligence());
+    }
+
+    default void save(AnimalModel model) {
+        getAnimalDao().save(toEntity(model));
     }
 
     default AnimalModel findById(int id) {
@@ -43,6 +46,14 @@ public interface Animal {
     default List<AnimalModel> findAll() {
         List<AnimalEntity> list1 = getAnimalDao().findAll();
         return list1.stream().map(this::toModel).toList();
+    }
+
+    default void update(AnimalModel model) {
+        getAnimalDao().update(toEntity(model));
+    }
+
+    default void updateIntelligence(BigDecimal intelligence, int id) {
+        getAnimalDao().updateIntelligence(intelligence, id);
     }
 
 }

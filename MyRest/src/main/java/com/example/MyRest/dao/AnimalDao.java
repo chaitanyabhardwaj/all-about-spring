@@ -6,6 +6,7 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -36,6 +37,21 @@ public class AnimalDao {
     public List<AnimalEntity> findAll() {
         TypedQuery<AnimalEntity> query = entityManager.createQuery("FROM AnimalEntity ORDER BY breed", AnimalEntity.class);
         return query.getResultList();
+    }
+
+    //update using 'merge' method
+    @Transactional
+    public void update(AnimalEntity entity) {
+        entityManager.merge(entity);
+    }
+
+    //update using 'JPQL'
+    @Transactional
+    public void updateIntelligence(BigDecimal intelligence, int id) {
+        entityManager.createQuery("UPDATE AnimalEntity SET intelligence = :intelligenceData WHERE id = :idData")
+                .setParameter("intelligenceData", intelligence)
+                .setParameter("idData", id)
+                .executeUpdate();
     }
 
 }

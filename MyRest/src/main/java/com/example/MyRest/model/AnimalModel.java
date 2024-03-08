@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class AnimalModel {
 
-    private int id;
+    private Integer id;
     private String breed;
     private BigDecimal intelligence;
 
@@ -18,11 +18,11 @@ public class AnimalModel {
         this.intelligence = intelligence;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

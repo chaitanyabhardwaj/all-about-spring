@@ -118,6 +118,8 @@ public class MyRestController {
 
     @PostMapping("/putAnimalInPark")
     public String putAnimalInPark(@RequestBody AnimalModel animalModel) {
+        if(animalModel.getId() == null || animalModel.getId() == 0)
+            animalModel.setId(-1);
         animal.save(animalModel);
         return "Saved!";
     }
@@ -135,6 +137,16 @@ public class MyRestController {
         else
             animalModel = animal.findByBreed(breed);
         return (animalModel != null) ? animalModel.toString() : "Not found";
+    }
+
+    @PostMapping("/updateAnimalFromPark")
+    public String updateAnimalFromPark(@RequestBody AnimalModel model) {
+        if(model.getBreed() == null || model.getBreed().isBlank() || model.getBreed().isEmpty()) {
+            animal.updateIntelligence(model.getIntelligence(), model.getId());
+            return "Updated intelligence!";
+        }
+        animal.update(model);
+        return "Updated!";
     }
 
     @PostConstruct
