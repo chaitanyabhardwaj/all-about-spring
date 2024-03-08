@@ -30,7 +30,10 @@ public interface Animal {
     }
 
     default void save(AnimalModel model) {
-        getAnimalDao().save(toEntity(model));
+        AnimalEntity entity = new AnimalEntity();
+        entity.setBreed(model.getBreed());
+        entity.setIntelligence(model.getIntelligence());
+        getAnimalDao().save(entity);
     }
 
     default AnimalModel findById(int id) {
