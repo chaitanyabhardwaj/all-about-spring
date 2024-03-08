@@ -123,8 +123,17 @@ public class MyRestController {
     }
 
     @GetMapping("/getAnimalFromPark")
-    public String getAnimalFromPark(@RequestParam(name="id") int id) {
-        AnimalModel animalModel = animal.findById(id);
+    public String getAnimalFromPark(
+            @RequestParam(name="id", required = false) Integer id,
+            @RequestParam(name="breed", required = false) String breed) {
+        if(id == null && breed == null) {
+            return animal.findAll().toString();
+        }
+        AnimalModel animalModel;
+        if(id != null)
+            animalModel = animal.findById(id);
+        else
+            animalModel = animal.findByBreed(breed);
         return (animalModel != null) ? animalModel.toString() : "Not found";
     }
 
