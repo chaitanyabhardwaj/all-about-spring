@@ -54,4 +54,15 @@ public class AnimalDao {
                 .executeUpdate();
     }
 
+    @Transactional
+    public void delete(AnimalEntity entity) {
+        entityManager.remove(entity);
+    }
+
+    @Transactional
+    public void delete(Integer id) {
+        entityManager.createQuery("DELETE FROM AnimalEntity WHERE id = :idData")
+                .setParameter("idData", id).executeUpdate();
+    }
+
 }

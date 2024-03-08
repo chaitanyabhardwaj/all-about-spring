@@ -149,6 +149,16 @@ public class MyRestController {
         return "Updated!";
     }
 
+    @DeleteMapping("/deleteAnimalFromPark")
+    public String deleteAnimalFromPark(@RequestBody AnimalModel model) {
+        if(model.getId() == null) {
+            animal.delete(model);
+            return "Deleted!";
+        }
+        animal.delete(model.getId());
+        return "Deleted By Id!";
+    }
+
     @PostConstruct
     public void init() {
         System.out.println("Bean " + getClass().getSimpleName() + " has been constructed!");

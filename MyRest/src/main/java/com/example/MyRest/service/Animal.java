@@ -56,4 +56,12 @@ public interface Animal {
         getAnimalDao().updateIntelligence(intelligence, id);
     }
 
+    default void delete(AnimalModel model) {
+        getAnimalDao().delete(toEntity(model));
+    }
+
+    default void delete(Integer id) {
+        getAnimalDao().delete(id);
+    }
+
 }
