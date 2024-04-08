@@ -71,6 +71,11 @@ public class MyRestController {
         return util.animalFarmHelper(animal1, animal2);
     }
 
+    @GetMapping("/getAllAnimals")
+    public List<AnimalModel> getAll() {
+        return animal.findAll();
+    }
+
     @GetMapping("/suggestAnimal")
     public String suggestAnimal() {
         List<String> animalList = List.of("Dog", "Cat", "Bird", "Tiger", "Elephant", "Camel", "Donkey", "Lizard");
