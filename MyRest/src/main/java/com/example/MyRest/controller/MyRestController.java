@@ -3,12 +3,15 @@ package com.example.MyRest.controller;
 import com.example.MyRest.model.AnimalModel;
 import com.example.MyRest.service.Animal;
 import com.example.MyRest.service.Plant;
+import com.example.util.AnimalNotFoundException;
 import com.example.util.MyRestUtil;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -69,6 +72,13 @@ public class MyRestController {
             @RequestParam(name = "animal1") String animal1,
             @RequestParam(name = "animal2") String animal2) {
         return util.animalFarmHelper(animal1, animal2);
+    }
+
+    @GetMapping("/get/{animalName}")
+    public AnimalModel getAnimalByName(@PathVariable String animalName) {
+        if(animal.findByBreed(animalName) == null)
+            throw new AnimalNotFoundException(animalName + " is not present in " + parkName);
+        return animal.findByBreed(animalName);
     }
 
     @GetMapping("/getAllAnimals")
@@ -162,6 +172,11 @@ public class MyRestController {
         }
         animal.delete(model.getId());
         return "Deleted By Id!";
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleAnimalNotFoundException(AnimalNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @PostConstruct
