@@ -174,11 +174,6 @@ public class MyRestController {
         return "Deleted By Id!";
     }
 
-    @ExceptionHandler
-    public ResponseEntity<String> handleAnimalNotFoundException(AnimalNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
     @PostConstruct
     public void init() {
         System.out.println("Bean " + getClass().getSimpleName() + " has been constructed!");
